@@ -13,7 +13,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import DataSource
+import fr.unica.miage.hassad.pizzapp.screens.CartScreen
 import fr.unica.miage.hassad.pizzapp.screens.PizzaMenu
+import fr.unica.miage.hassad.pizzapp.screens.WelcomeScreen
 
 
 @kotlinx.serialization.Serializable
@@ -27,17 +29,23 @@ data class PizzaRoute(val idPizza: Int)
 @Preview
 @Composable
 fun MyApp() {
-    var navController = rememberNavController()
+    val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = PizzaList
+        startDestination = "welcome"
     ) {
-        composable<PizzaList> {
+        composable("welcome") {
+            WelcomeScreen(navController = navController)
+        }
+        composable("menu") {
             PizzaMenu(
                 menu = DataSource().loadPizzas(),
                 modifier = Modifier.fillMaxSize().padding(16.dp),
                 navController = navController
             )
+        }
+        composable("cart") {
+            CartScreen()
         }
         composable<PizzaRoute> { backstackEntry ->
             val pizzaRoute = backstackEntry.toRoute<PizzaRoute>()

@@ -26,7 +26,7 @@ fun WelcomeScreen(navController: NavController) {
         )
         Spacer(modifier = Modifier.height(16.dp))
         Button(onClick = { navController.navigate("menu") }) {
-            Text(text = "Start Ordering")
+            Text(text = "Voir le menu")
         }
     }
 }
