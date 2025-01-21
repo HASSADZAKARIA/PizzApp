@@ -1,5 +1,6 @@
 package fr.unica.miage.hassad.pizzapp.screens
 
+import DataSourceViewModel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -9,6 +10,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -16,18 +18,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-
+import androidx.lifecycle.viewmodel.compose.viewModel
 import fr.unica.miage.hassad.pizzapp.R
-import DataSource
 import fr.unica.miage.hassad.pizzapp.PizzaRoute
 import fr.unica.miage.hassad.pizzapp.model.Pizza
 import fr.unica.miage.hassad.pizzapp.ui.theme.PizzAppTheme
+
 
 @Composable
 fun PizzaCard(
     pizza: Pizza,
     onClickPizza: () -> Unit = {},
-    modifier: Modifier = Modifier) {
+    modifier: Modifier = Modifier
+) {
     Card(
         modifier = modifier,
         onClick = onClickPizza
@@ -48,7 +51,7 @@ fun PizzaCard(
                     .align(Alignment.CenterHorizontally)
             )
             Text(
-                text = pizza.price.toString()+" €",
+                text = pizza.price.toString() + " €",
                 modifier = Modifier
                     .padding(16.dp)
                     .align(Alignment.CenterHorizontally),
@@ -75,7 +78,8 @@ fun PizzaMenu(menu: List<Pizza>, modifier: Modifier = Modifier, navController: N
                 onClickPizza = {
                     navController.navigate(route = PizzaRoute(menu.indexOf(pizza)))
                 },
-                modifier = modifier.padding(16.dp))
+                modifier = modifier.padding(16.dp)
+            )
         }
     }
 }
@@ -83,7 +87,8 @@ fun PizzaMenu(menu: List<Pizza>, modifier: Modifier = Modifier, navController: N
 @Preview(showBackground = true)
 @Composable
 fun PizzaMenuPreview() {
+    val dataSourceViewModel: DataSourceViewModel = viewModel()
     PizzAppTheme {
-        PizzaMenu(menu = DataSource().loadPizzas(), navController = rememberNavController())
+        PizzaMenu(menu = dataSourceViewModel.pizzas.collectAsState().value, navController = rememberNavController())
     }
 }

@@ -1,10 +1,10 @@
 package fr.unica.miage.hassad.pizzapp
-import fr.unica.miage.hassad.pizzapp.screens.PizzaDetail
 
-
+import DataSourceViewModel
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -12,24 +12,25 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import DataSource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import fr.unica.miage.hassad.pizzapp.screens.CartScreen
 import fr.unica.miage.hassad.pizzapp.screens.PizzaMenu
 import fr.unica.miage.hassad.pizzapp.screens.WelcomeScreen
+import fr.unica.miage.hassad.pizzapp.screens.PizzaDetail
 
 
 @kotlinx.serialization.Serializable
 object PizzaList
-//Route vers le menu
 
 @kotlinx.serialization.Serializable
 data class PizzaRoute(val idPizza: Int)
-//Route vers une pizza en particulier
 
 @Preview
 @Composable
 fun MyApp() {
     val navController = rememberNavController()
+    val dataSourceViewModel: DataSourceViewModel = viewModel()
+
     NavHost(
         navController = navController,
         startDestination = "welcome"
@@ -39,7 +40,7 @@ fun MyApp() {
         }
         composable("menu") {
             PizzaMenu(
-                menu = DataSource().loadPizzas(),
+                menu = dataSourceViewModel.pizzas.collectAsState().value,
                 modifier = Modifier.fillMaxSize().padding(16.dp),
                 navController = navController
             )
@@ -49,7 +50,7 @@ fun MyApp() {
         }
         composable<PizzaRoute> { backstackEntry ->
             val pizzaRoute = backstackEntry.toRoute<PizzaRoute>()
-            PizzaDetail(pizza = DataSource().loadPizza(pizzaRoute.idPizza))
+            PizzaDetail(pizza = dataSourceViewModel.getPizza(pizzaRoute.idPizza))
         }
     }
 }
