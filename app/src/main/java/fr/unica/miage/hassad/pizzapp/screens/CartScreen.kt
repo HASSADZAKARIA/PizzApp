@@ -7,12 +7,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import fr.unica.miage.hassad.pizzapp.viewmodel.CartViewModel
 import fr.unica.miage.hassad.pizzapp.model.Pizza
 
 @Composable
-fun CartScreen(cartViewModel: CartViewModel = viewModel()) {
+fun CartScreen(cartViewModel: CartViewModel) {
     val cartItems = cartViewModel.cartItems.collectAsState()
     val totalPrice = cartViewModel.totalPrice.collectAsState()
 

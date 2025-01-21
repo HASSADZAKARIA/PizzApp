@@ -1,11 +1,7 @@
 package fr.unica.miage.hassad.pizzapp.screens
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.FloatingActionButton
@@ -24,26 +20,28 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import fr.unica.miage.hassad.pizzapp.R
 import fr.unica.miage.hassad.pizzapp.model.Pizza
+import fr.unica.miage.hassad.pizzapp.viewmodel.CartViewModel
 
 @Composable
-fun PizzaDetail(pizza: Pizza, modifier: Modifier = Modifier) {
-    var extraCheese = remember { mutableStateOf(50) }
+fun PizzaDetail(pizza: Pizza, cartViewModel: CartViewModel, modifier: Modifier = Modifier) {
+    val extraCheese = remember { mutableStateOf(50) }
 
     Scaffold(
         modifier = modifier,
         floatingActionButton = {
-            FloatingActionButton(onClick = { /* TODO */ }) {
+            FloatingActionButton(onClick = {
+                cartViewModel.addPizzaToCart(pizza, extraCheese.value)
+            }) {
                 Icon(
                     imageVector = Icons.Filled.ShoppingCart,
                     contentDescription = "Add to cart"
                 )
             }
-        }) {
-            innerPadding ->
+        }) { innerPadding ->
         Column(
             modifier = Modifier.padding(innerPadding).fillMaxSize(),
-            horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
-            verticalArrangement = androidx.compose.foundation.layout.Arrangement.Center
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
             Image(
                 painter = painterResource(id = pizza.image),
@@ -71,5 +69,5 @@ fun PizzaDetail(pizza: Pizza, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun PizzaDetailPreview() {
-    PizzaDetail(pizza = Pizza("Margherita", 8.0, image = R.drawable.pizza1))
+    PizzaDetail(pizza = Pizza("Margherita", 8.0, image = R.drawable.pizza1), cartViewModel = CartViewModel())
 }

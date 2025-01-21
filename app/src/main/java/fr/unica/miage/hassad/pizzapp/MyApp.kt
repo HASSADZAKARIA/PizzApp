@@ -17,7 +17,7 @@ import fr.unica.miage.hassad.pizzapp.screens.CartScreen
 import fr.unica.miage.hassad.pizzapp.screens.PizzaMenu
 import fr.unica.miage.hassad.pizzapp.screens.WelcomeScreen
 import fr.unica.miage.hassad.pizzapp.screens.PizzaDetail
-
+import fr.unica.miage.hassad.pizzapp.viewmodel.CartViewModel
 
 @kotlinx.serialization.Serializable
 object PizzaList
@@ -25,9 +25,8 @@ object PizzaList
 @kotlinx.serialization.Serializable
 data class PizzaRoute(val idPizza: Int)
 
-@Preview
 @Composable
-fun MyApp() {
+fun MyApp(cartViewModel: CartViewModel) {
     val navController = rememberNavController()
     val dataSourceViewModel: DataSourceViewModel = viewModel()
 
@@ -46,11 +45,11 @@ fun MyApp() {
             )
         }
         composable("cart") {
-            CartScreen()
+            CartScreen(cartViewModel = cartViewModel)
         }
         composable<PizzaRoute> { backstackEntry ->
             val pizzaRoute = backstackEntry.toRoute<PizzaRoute>()
-            PizzaDetail(pizza = dataSourceViewModel.getPizza(pizzaRoute.idPizza))
+            PizzaDetail(pizza = dataSourceViewModel.getPizza(pizzaRoute.idPizza), cartViewModel = cartViewModel)
         }
     }
 }
