@@ -20,7 +20,7 @@ Welcome to **PizzApp**, the ultimate pizza ordering application! This project is
 
 ## 🎥 Video
 
-![Watch the video](https://drive.google.com/file/d/1vecHYI5RiJmmbP1FUiMPt54BKpdef5q3/view?usp=sharing)
+https://drive.google.com/file/d/1vecHYI5RiJmmbP1FUiMPt54BKpdef5q3/view?usp=sharing
 
 ## 🚀 Getting Started
 
@@ -80,14 +80,6 @@ Contributions are welcome! Please follow these steps to contribute:
 4. Push to the branch (`git push origin feature/your-feature`).
 5. Open a pull request.
 
-## 📄 License
-
-This project is licensed under the MIT License. See the `LICENSE` file for more details.
-
-## 🙏 Acknowledgements
-
-- Thanks to the Android community for their valuable resources and tutorials.
-- Special thanks to the contributors who helped make this project better.
 
 ---
 
