@@ -20,7 +20,7 @@ Welcome to **PizzApp**, the ultimate pizza ordering application! This project is
 
 ## 🎥 Video
 
-[![Watch the video]https://drive.google.com/file/d/1vecHYI5RiJmmbP1FUiMPt54BKpdef5q3/view?usp=sharing
+![Watch the video]https://drive.google.com/file/d/1vecHYI5RiJmmbP1FUiMPt54BKpdef5q3/view?usp=sharing
 
 ## 🚀 Getting Started
 
