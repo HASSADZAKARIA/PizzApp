@@ -12,11 +12,15 @@ Welcome to **PizzApp**, the ultimate pizza ordering application! This project is
 
 ## 📸 Screenshots
 
-![Welcome Screen](screenshots/welcome_screen.png)
-![Pizza Menu](screenshots/pizza_menu.png)
-![Pizza Detail](screenshots/pizza_detail.png)
-![Cart](screenshots/cart.png)
-![Order History](screenshots/order_history.png)
+![Welcome Screen](img.png)
+![Pizza Menu](img_1.png)
+![Pizza Detail](img_2.png)
+![Cart](img_3.png)
+![Order History](img_4.png)
+
+## 🎥 Video
+
+[![Watch the video]https://drive.google.com/file/d/1vecHYI5RiJmmbP1FUiMPt54BKpdef5q3/view?usp=sharing
 
 ## 🚀 Getting Started
 
